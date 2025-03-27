@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="415.0" stylesheets="@css/contaCorrente.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cripto.agi.agi.javafx.controllers.CarteiraCorrenteController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="415.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cripto.agi.agi.javafx.controllers.CarteiraCorrenteController">
    <children>
       <Pane prefHeight="250.0" prefWidth="415.0" style="-fx-background-color: #0052CC;" styleClass="pane-top">
          <children>
@@ -39,6 +40,11 @@
                </image>
             </ImageView>
             <Label layoutX="242.0" layoutY="241.0" styleClass="info-label" text="Carteira Criptmoedas" />
+            <ImageView fitHeight="114.0" fitWidth="75.0" layoutX="326.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/agilogo-removebg-preview.png" />
+               </image>
+            </ImageView>
          </children></Pane>
       <Button layoutX="39.0" layoutY="220.0" mnemonicParsing="false" onAction="#telaPix" prefHeight="61.0" prefWidth="75.0" styleClass="crypto-button" />
       <Pane layoutX="51.0" layoutY="328.0" prefHeight="200.0" prefWidth="313.0" styleClass="info-pane">
@@ -63,7 +69,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="40.0" layoutY="138.0" styleClass="info-label" text="você já ccomeça a investir">
+            <Label layoutX="40.0" layoutY="138.0" styleClass="info-label" text="você já começa a investir">
                <font>
                   <Font size="20.0" />
                </font>
@@ -98,4 +104,8 @@
          </font>
       </Label>
    </children>
+   <stylesheets>
+      <URL value="@css/contaCorrente.css" />
+      <URL value="@css/contaCorrente.css" />
+   </stylesheets>
 </Pane>

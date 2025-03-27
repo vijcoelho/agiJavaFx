@@ -257,13 +257,13 @@ public class CarteiraCriptoController {
         System.out.println("========================================================================================================================================");
     }
 
-    public void transferirCripto(String emailRecebidor, double valor, int idCripto) {
+    public boolean transferirCripto(String emailRecebidor, double valor, int idCripto) {
         Cliente clienteRemetente = clienteController.pegarClienteLogado();
         Cliente clienteRecebidor = clienteDAO.encontrarEmail(emailRecebidor);
 
         if (Objects.equals(clienteRemetente.getId_cliente(), clienteRecebidor.getId_cliente())) {
             System.out.println("Erro: Você não pode transferir para si mesmo!");
-            return;
+            return false;
         }
 
         Carteira carteira = carteiraDAO.pegarCarteiraPeloClienteId(clienteRemetente.getId_cliente());
@@ -289,13 +289,13 @@ public class CarteiraCriptoController {
             }
             default -> {
                 System.out.println("Erro: ID de criptomoeda inválido!");
-                return;
+                return false;
             }
         }
 
         if (saldoRemetente < valor) {
             System.out.println("Erro: Saldo insuficiente para realizar a transferência!");
-            return;
+            return false;
         }
 
         carteiraCriptoDAO.atualizarSaldoCripto(carteiraRecebidor.getIdCliente(), idCripto, saldoRecebidor + valor);
@@ -315,6 +315,7 @@ public class CarteiraCriptoController {
         transacaoDAO.comprar(transacao);
 
         System.out.println("Transferência realizada com sucesso!");
+        return true;
     }
 
 }

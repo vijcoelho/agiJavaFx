@@ -22,8 +22,6 @@ public class CarteiraCorrenteController {
     @FXML
     private Label nomeLabel;
 
-    private Stage stage;
-    private Scene scene;
     private ClienteController controller;
     private CarteiraDAO carteiraDAO;
     private CarteiraCriptoController carteiraCriptoController;
@@ -58,6 +56,11 @@ public class CarteiraCorrenteController {
     public void carteiraCripto(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cripto/agi/agi/carteiraCripto.fxml"));
         Parent root = loader.load();
+
+        Cliente cliente = controller.pegarClienteLogado();
+        if (cliente.getStatus().equals("desativado")) {
+            carteiraCriptoController.ativarCarteiraCripto();
+        }
 
         CriptoController criptoController = loader.getController();
         criptoController.setClienteController(this.controller, this.carteiraDAO, this.carteiraCriptoController);

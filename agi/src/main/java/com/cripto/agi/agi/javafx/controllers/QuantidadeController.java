@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CriptoController {
+public class QuantidadeController {
     @FXML
     private Label saldoLabel;
     @FXML
@@ -52,11 +52,11 @@ public class CriptoController {
         nomeLabel.setText(cliente.getNome());
         saldoLabel.setText(String.valueOf(carteira.getSaldoContaCorrente()));
 
-        btcValor.setText(String.valueOf(carteiraCripto.getSaldoBTC()));
-        ethValor.setText(String.valueOf(carteiraCripto.getSaldoETH()));
-        solValor.setText(String.valueOf(carteiraCripto.getSaldoSOl()));
-        agicoinValor.setText(String.valueOf(carteiraCripto.getSaldoAGICOIN()));
-        saldoGeral.setText(String.valueOf(carteiraCripto.getSaldoBRL()));
+        btcValor.setText(String.format("%.8f", carteiraCripto.conversao(1, carteiraCripto.getSaldoBTC())));
+        ethValor.setText(String.format("%.8f", carteiraCripto.conversao(2, carteiraCripto.getSaldoETH())));
+        solValor.setText(String.format("%.8f",carteiraCripto.conversao(3, carteiraCripto.getSaldoSOl())));
+        agicoinValor.setText(String.format("%.1f",carteiraCripto.getSaldoAGICOIN()));
+        saldoGeral.setText(String.format("%.1f",carteiraCripto.getSaldoBRL()));
     }
 
     public void carteiraCorrente(ActionEvent actionEvent) throws IOException {
@@ -71,12 +71,12 @@ public class CriptoController {
         stage.setScene(new Scene(root));
     }
 
-    public void verQuantidadeCripto(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cripto/agi/agi/quantidadeCripto.fxml"));
+    public void verEmReal(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cripto/agi/agi/carteiraCripto.fxml"));
         Parent root = loader.load();
 
-        QuantidadeController quantidadeController = loader.getController();
-        quantidadeController.setClienteController(this.controller, this.carteiraDAO, this.carteiraCriptoController);
+        CriptoController criptoController = loader.getController();
+        criptoController.setClienteController(this.controller, this.carteiraDAO, this.carteiraCriptoController);
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setResizable(false);

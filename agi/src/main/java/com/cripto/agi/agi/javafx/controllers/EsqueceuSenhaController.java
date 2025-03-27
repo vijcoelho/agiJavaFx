@@ -22,9 +22,9 @@ public class EsqueceuSenhaController {
     private TextField senhaText;
     @FXML
     private TextField confirmarSenhaText;
+    @FXML
+    private TextField cpfText;
 
-    private Stage stage;
-    private Scene scene;
     private ClienteController controller;
     private CarteiraDAO carteiraDAO;
     private CarteiraCriptoController carteiraCriptoController;
@@ -37,10 +37,11 @@ public class EsqueceuSenhaController {
 
     public void esqueceuSenha(ActionEvent actionEvent) throws IOException {
         String email = emailText.getText();
+        String cpf = cpfText.getText();
         String senha = senhaText.getText();
         String confirmarSenha = confirmarSenhaText.getText();
 
-        if (controller.alterarSenha(email, senha, confirmarSenha)) {
+        if (controller.alterarSenha(email, cpf, senha, confirmarSenha)) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Alteracao realizada");
             alert.setHeaderText(null);
