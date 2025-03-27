@@ -1,6 +1,8 @@
 package com.cripto.agi.agi.javafx.controllers;
 
+import com.cripto.agi.agi.controller.CarteiraCriptoController;
 import com.cripto.agi.agi.controller.ClienteController;
+import com.cripto.agi.agi.dao.CarteiraDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,9 +26,13 @@ public class EsqueceuSenhaController {
     private Stage stage;
     private Scene scene;
     private ClienteController controller;
+    private CarteiraDAO carteiraDAO;
+    private CarteiraCriptoController carteiraCriptoController;
 
-    public void setClienteController(ClienteController controller) {
+    public void setClienteController(ClienteController controller, CarteiraDAO carteiraDAO, CarteiraCriptoController carteiraCriptoController) {
         this.controller = controller;
+        this.carteiraDAO = carteiraDAO;
+        this.carteiraCriptoController = carteiraCriptoController;
     }
 
     public void esqueceuSenha(ActionEvent actionEvent) throws IOException {
@@ -51,7 +57,7 @@ public class EsqueceuSenhaController {
         Parent root = loader.load();
 
         CadastroController cadastroController = loader.getController();
-        cadastroController.setClienteController(this.controller);
+        cadastroController.setClienteController(this.controller, this.carteiraDAO, this.carteiraCriptoController);
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setResizable(false);
@@ -63,7 +69,7 @@ public class EsqueceuSenhaController {
         Parent root = loader.load();
 
         LoginController loginController = loader.getController();
-        loginController.setClienteController(this.controller);
+        loginController.setClienteController(this.controller, this.carteiraDAO, this.carteiraCriptoController);
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setResizable(false);

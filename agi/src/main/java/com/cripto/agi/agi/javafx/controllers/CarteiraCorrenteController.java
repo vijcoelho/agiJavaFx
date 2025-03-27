@@ -1,5 +1,6 @@
 package com.cripto.agi.agi.javafx.controllers;
 
+import com.cripto.agi.agi.controller.CarteiraCriptoController;
 import com.cripto.agi.agi.controller.ClienteController;
 import com.cripto.agi.agi.dao.CarteiraDAO;
 import com.cripto.agi.agi.model.Carteira;
@@ -25,10 +26,12 @@ public class CarteiraCorrenteController {
     private Scene scene;
     private ClienteController controller;
     private CarteiraDAO carteiraDAO;
+    private CarteiraCriptoController carteiraCriptoController;
 
-    public void setClienteController(ClienteController controller, CarteiraDAO carteiraDAO) {
+    public void setClienteController(ClienteController controller, CarteiraDAO carteiraDAO, CarteiraCriptoController carteiraCriptoController) {
         this.controller = controller;
         this.carteiraDAO = carteiraDAO;
+        this.carteiraCriptoController = carteiraCriptoController;
         this.carregarInfos();
     }
 
@@ -45,7 +48,19 @@ public class CarteiraCorrenteController {
         Parent root = loader.load();
 
         PixController pixController = loader.getController();
-        pixController.setClienteController(this.controller, this.carteiraDAO);
+        pixController.setClienteController(this.controller, this.carteiraDAO, this.carteiraCriptoController);
+
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.setResizable(false);
+        stage.setScene(new Scene(root));
+    }
+
+    public void carteiraCripto(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cripto/agi/agi/carteiraCripto.fxml"));
+        Parent root = loader.load();
+
+        CriptoController criptoController = loader.getController();
+        criptoController.setClienteController(this.controller, this.carteiraDAO, this.carteiraCriptoController);
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setResizable(false);

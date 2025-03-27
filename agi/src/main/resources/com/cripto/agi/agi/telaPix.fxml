@@ -9,7 +9,7 @@
     <children>
         <Pane prefHeight="250.0" prefWidth="415.0" style="-fx-background-color: #0052CC;" styleClass="pane-top">
             <children>
-                <Label layoutX="14.0" layoutY="14.0" styleClass="header-label" text="Ola, " textFill="WHITE">
+                <Label layoutX="14.0" layoutY="14.0" styleClass="header-label" text="Olá, " textFill="WHITE">
                     <font>
                         <Font size="30.0" />
                     </font>
@@ -68,7 +68,7 @@
                         <Font size="20.0" />
                     </font>
                 </Label>
-            <TextField fx:id="pixText" layoutX="157.0" layoutY="51.0" prefHeight="26.0" prefWidth="131.0" />
+            <TextField fx:id="pixText" layoutX="157.0" layoutY="51.0" prefHeight="26.0" prefWidth="131.0" style="-fx-border-color: #000000; -fx-border-radius: 5%;" />
             <Button layoutX="98.0" layoutY="119.0" mnemonicParsing="false" onAction="#fazerPix" prefHeight="67.0" prefWidth="119.0" styleClass="crypto-button" text="Fazer Pix" textFill="#0052cc">
                <font>
                   <Font size="18.0" />

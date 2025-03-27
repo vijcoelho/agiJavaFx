@@ -1,5 +1,6 @@
 package com.cripto.agi.agi;
 
+import com.cripto.agi.agi.controller.CarteiraCriptoController;
 import com.cripto.agi.agi.controller.ClienteController;
 import com.cripto.agi.agi.dao.CarteiraCriptoDAO;
 import com.cripto.agi.agi.dao.CarteiraDAO;
@@ -29,11 +30,12 @@ public class MainApplication extends Application {
         ClienteDAO clienteDAO = new ClienteDAO(connection);
         TransacaoDAO transacaoDAO = new TransacaoDAO(connection);
         ClienteController controller = new ClienteController(clienteDAO, carteiraDAO, transacaoDAO);
+        CarteiraCriptoController carteiraCriptoController = new CarteiraCriptoController(controller, carteiraCriptoDAO, carteiraDAO, clienteDAO, transacaoDAO);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
         Parent root = loader.load();
         LoginController loginController = loader.getController();
-        loginController.setClienteController(controller);
+        loginController.setClienteController(controller, carteiraDAO, carteiraCriptoController);
         Scene scene = new Scene(root);
         stage.setTitle("Login");
         stage.setScene(scene);
