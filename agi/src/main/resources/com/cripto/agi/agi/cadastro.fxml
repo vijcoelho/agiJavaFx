@@ -5,11 +5,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:controller="com.cripto.agi.agi.javafx.controllers.CadastroController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="415.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="415.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cripto.agi.agi.javafx.controllers.CadastroController">
     <children>
         <Button fx:id="loginBotao" layoutX="112.0" layoutY="438.0" mnemonicParsing="false" onAction="#cadastro" prefHeight="26.0" prefWidth="192.0" text="Cadastro" />
         <Button fx:id="cadastroBotao" layoutX="112.0" layoutY="484.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="192.0" text="Login" />
-        <Button fx:id="esqueceuSenhaBotao" layoutX="112.0" layoutY="533.0" mnemonicParsing="false" onAction="#esqueceuSenha" prefHeight="26.0" prefWidth="192.0" text="Esqueceu senha" />
+        <Button fx:id="esqueceuSenhaBotao" layoutX="112.0" layoutY="533.0" mnemonicParsing="false" onAction="#esqueceuSenha" prefHeight="26.0" prefWidth="192.0" text="Esqueci senha" />
         <PasswordField fx:id="senhaText" layoutX="68.0" layoutY="347.0" prefHeight="26.0" prefWidth="279.0" promptText="Senha" />
         <TextField fx:id="nomeText" layoutX="68.0" layoutY="181.0" prefHeight="26.0" prefWidth="279.0" promptText="Nome Completo" stylesheets="@css/style.css" />
         <TextField fx:id="emailText" layoutX="68.0" layoutY="239.0" prefHeight="26.0" prefWidth="279.0" promptText="Email" stylesheets="@css/style.css" />

@@ -7,7 +7,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="415.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cripto.agi.agi.javafx.controllers.EsqueceuSenhaController">
     <children>
-        <Button fx:id="loginBotao" layoutX="112.0" layoutY="438.0" mnemonicParsing="false" onAction="#esqueceuSenha" prefHeight="26.0" prefWidth="192.0" text="Esqueceu Senha" />
+        <Button fx:id="loginBotao" layoutX="112.0" layoutY="438.0" mnemonicParsing="false" onAction="#esqueceuSenha" prefHeight="26.0" prefWidth="192.0" text="Esqueci Senha" />
         <Button fx:id="cadastroBotao" layoutX="112.0" layoutY="484.0" mnemonicParsing="false" onAction="#cadastro" prefHeight="26.0" prefWidth="192.0" text="Cadastro" />
         <Button fx:id="esqueceuSenhaBotao" layoutX="112.0" layoutY="533.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="192.0" text="Login" />
         <PasswordField fx:id="senhaText" layoutX="68.0" layoutY="325.0" prefHeight="26.0" prefWidth="279.0" promptText="Senha nova" />
