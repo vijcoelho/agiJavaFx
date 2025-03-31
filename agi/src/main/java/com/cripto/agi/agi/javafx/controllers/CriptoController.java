@@ -100,7 +100,7 @@ public class CriptoController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cripto/agi/agi/vender.fxml"));
         Parent root = loader.load();
 
-        VerderController verderController = loader.getController();
+        VenderController verderController = loader.getController();
         verderController.setClienteController(this.controller, this.controller.getCarteiraDAO(), carteiraCriptoController);
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -132,7 +132,15 @@ public class CriptoController {
         stage.setScene(new Scene(root));
     }
 
-    public void sair(ActionEvent actionEvent) {
-        ((Stage)(((Button)actionEvent.getSource()).getScene().getWindow())).close();
+    public void sair(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/cripto/agi/agi/login.fxml"));
+        Parent root = loader.load();
+
+        LoginController loginController = loader.getController();
+        loginController.setClienteController(controller, carteiraDAO, carteiraCriptoController);
+
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.setResizable(false);
+        stage.setScene(new Scene(root));
     }
 }

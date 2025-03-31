@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="415.0" stylesheets="@css/contaCorrente.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cripto.agi.agi.javafx.controllers.VerderController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="415.0" stylesheets="@css/contaCorrente.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cripto.agi.agi.javafx.controllers.VenderController">
     <children>
         <Pane prefHeight="664.0" prefWidth="415.0" style="-fx-background-color: #0052CC;" styleClass="pane-top">
             <children>

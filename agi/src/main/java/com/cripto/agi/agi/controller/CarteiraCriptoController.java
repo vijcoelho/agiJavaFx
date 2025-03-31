@@ -9,6 +9,7 @@ import com.cripto.agi.agi.model.CarteiraCripto;
 import com.cripto.agi.agi.model.Cliente;
 import com.cripto.agi.agi.model.Transacao;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -159,57 +160,92 @@ public class CarteiraCriptoController {
         return true;
     }
 
-    public boolean venderCriptoMoeda(int opcao, double valor){
+//    public boolean venderCriptoMoeda(int opcao, double valor){
+//        Cliente cliente = clienteController.pegarClienteLogado();
+//        Carteira carteira = carteiraDAO.pegarCarteiraPeloClienteId(cliente.getId_cliente());
+//        CarteiraCripto carteiraCripto = carteiraCriptoDAO.acharPeloIdCliente(cliente.getId_cliente());
+//
+//        if (carteiraCripto == null) return false;
+//        if (carteira == null) return false;
+//
+//        int idCripto;
+//
+//        if (opcao == 1){
+//            if (carteiraCripto.getSaldoBTC() < valor) return false;
+//            idCripto = 1;
+//            carteiraCriptoDAO.subtrairCripto(valor,opcao,carteiraCripto.getIdCliente());
+//            carteiraDAO.atualizarSaldo(carteira.getSaldoContaCorrente() + valor,carteira.getId_carteira());
+//        } else if (opcao == 2){
+//            if (carteiraCripto.getSaldoETH() < valor) return false;
+//            idCripto = 2;
+//            carteiraCriptoDAO.subtrairCripto(valor,opcao,carteiraCripto.getIdCliente());
+//            carteiraDAO.atualizarSaldo(carteira.getSaldoContaCorrente() + valor,carteira.getId_carteira());
+//        } else if (opcao == 3){
+//            if (carteiraCripto.getSaldoSOl() < valor) return false;
+//            idCripto = 3;
+//            carteiraCriptoDAO.subtrairCripto(valor,opcao,carteiraCripto.getIdCliente()); // subtrair valor
+//            carteiraDAO.atualizarSaldo(carteira.getSaldoContaCorrente() + valor,carteira.getId_carteira()); // adc saldo na conta
+//        } else {
+//            return false;
+//        }
+//
+//        LocalDateTime data = LocalDateTime.now();
+//        Transacao transacao = new Transacao(
+//                carteira.getId_carteira(),
+//                cliente.getId_cliente(),
+//                idCripto,
+//                "PAGO",
+//                3,
+//                valor,
+//                data
+//        );
+//        transacaoDAO.comprar(transacao);
+//
+//        double saldoBRl = carteiraCripto.getSaldoSOl() + carteiraCripto.getSaldoETH() + carteiraCripto.getSaldoBTC();
+//        carteiraCriptoDAO.atualizarSaldoBrl(saldoBRl, cliente.getId_cliente());
+//
+//        return carteiraCriptoDAO.venderCriptomoedas(opcao, valor, cliente.getId_cliente());
+//    }
+
+    public boolean venderCriptoMoeda(int opcao, double valor) {
         Cliente cliente = clienteController.pegarClienteLogado();
         Carteira carteira = carteiraDAO.pegarCarteiraPeloClienteId(cliente.getId_cliente());
         CarteiraCripto carteiraCripto = carteiraCriptoDAO.acharPeloIdCliente(cliente.getId_cliente());
 
-        if (carteiraCripto == null) return false;
-        if (carteira == null) return false;
-
-        int idCripto;
-        double novoValor;
-
-        if (opcao == 1){
-            if (carteiraCripto.getSaldoBTC() < valor) return false;
-            idCripto = 1;
-            novoValor = carteiraCripto.getSaldoBTC() - valor;
-            carteiraCriptoDAO.subtrairCripto(valor,opcao,carteiraCripto.getIdCliente());
-            carteiraDAO.atualizarSaldo(carteira.getSaldoContaCorrente() + valor,carteira.getId_carteira());
-        } else if (opcao == 2){
-            if (carteiraCripto.getSaldoETH() < valor) return false;
-            idCripto = 2;
-            novoValor = carteiraCripto.getSaldoETH() - valor;
-            carteiraCriptoDAO.subtrairCripto(valor,opcao,carteiraCripto.getIdCliente());
-            carteiraDAO.atualizarSaldo(carteira.getSaldoContaCorrente() + valor,carteira.getId_carteira());
-        } else if (opcao == 3){
-            if (carteiraCripto.getSaldoSOl() < valor) return false;
-            idCripto = 3;
-            novoValor = carteiraCripto.getSaldoSOl() - valor;
-            carteiraCriptoDAO.subtrairCripto(valor,opcao,carteiraCripto.getIdCliente()); // subtrair valor
-            carteiraDAO.atualizarSaldo(carteira.getSaldoContaCorrente() + valor,carteira.getId_carteira()); // adc saldo na conta
-        } else {
-            return false;
+        double valorDebitado = 0;
+        if (opcao == 1 && (valor <= carteiraCripto.getSaldoBTC())) {
+            valorDebitado = carteiraCripto.getSaldoBTC() - valor;
+        } else if (opcao == 2 && (valor <= carteiraCripto.getSaldoETH())) {
+            valorDebitado = carteiraCripto.getSaldoETH() - valor;
+        } else if (opcao == 3 && (valor <= carteiraCripto.getSaldoSOl())) {
+            valorDebitado = carteiraCripto.getSaldoSOl() - valor;
         }
 
-        LocalDateTime data = LocalDateTime.now();
-        Transacao transacao = new Transacao(
-                carteira.getId_carteira(),
-                cliente.getId_cliente(),
-                idCripto,
-                "PAGO",
-                3,
-                valor,
-                data
-        );
+        try {
+            carteiraDAO.atualizarSaldo((carteira.getSaldoContaCorrente() + valor), carteira.getId_carteira());
+            carteiraCriptoDAO.atualizarSaldoCripto(cliente.getId_cliente(), opcao, valorDebitado);
+            carteiraCriptoDAO.atualizarSaldoBrl(
+                    (carteiraCripto.getSaldoSOl()
+                            + carteiraCripto.getSaldoBTC()
+                            + carteiraCripto.getSaldoETH() - valor),
+                    cliente.getId_cliente()
+            );
 
-        carteiraDAO.atualizarSaldo((carteira.getSaldoContaCorrente() + valor), carteira.getId_carteira());
-        transacaoDAO.comprar(transacao);
-
-        double saldoBRl = carteiraCripto.getSaldoSOl() + carteiraCripto.getSaldoETH() + carteiraCripto.getSaldoBTC() - valor;
-        carteiraCriptoDAO.atualizarSaldoBrl(saldoBRl, cliente.getId_cliente());
-
-        return carteiraCriptoDAO.venderCriptomoedas(opcao, novoValor, cliente.getId_cliente());
+            LocalDateTime data = LocalDateTime.now();
+            Transacao transacao = new Transacao(
+                    carteira.getId_carteira(),
+                    cliente.getId_cliente(),
+                    opcao,
+                    "PAGO",
+                    3,
+                    valor,
+                    data
+            );
+            transacaoDAO.comprar(transacao);
+            return true;
+        } catch (Exception e) {
+            throw new RuntimeException("ERRO AO VENDER! ", e);
+        }
     }
 
     public void exibirTutorial(){
