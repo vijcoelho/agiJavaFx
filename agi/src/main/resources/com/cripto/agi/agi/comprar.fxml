@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="415.0" stylesheets="@css/contaCorrente.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cripto.agi.agi.javafx.controllers.CompraController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="415.0" stylesheets="@css/contaCorrente.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cripto.agi.agi.javafx.controllers.CompraController">
     <children>
         <Pane prefHeight="664.0" prefWidth="415.0" style="-fx-background-color: #0052CC;" styleClass="pane-top">
             <children>
@@ -30,7 +30,7 @@
                     </font>
                 </Label>
                 <Label layoutX="242.0" layoutY="241.0" styleClass="info-label" text="Carteira Criptmoedas" />
-                <Pane layoutX="22.0" layoutY="134.0" prefHeight="194.0" prefWidth="372.0" styleClass="info-pane">
+                <Pane layoutX="22.0" layoutY="134.0" prefHeight="194.0" prefWidth="372.0" style="-fx-background-color: d3eaff;" styleClass="info-pane">
                     <children>
                         <Label layoutX="22.0" layoutY="14.0" prefHeight="32.0" prefWidth="263.0" text="Preco das Criptomoedas">
                             <font>
@@ -101,7 +101,7 @@
                         <Font size="17.0" />
                     </font>
                 </Label>
-            <Pane layoutX="22.0" layoutY="356.0" prefHeight="200.0" prefWidth="372.0" styleClass="info-pane">
+            <Pane layoutX="22.0" layoutY="356.0" prefHeight="200.0" prefWidth="372.0" style="-fx-background-color: d3eaff;" styleClass="info-pane">
                <children>
                   <Button layoutX="145.0" layoutY="136.0" mnemonicParsing="false" onAction="#comprarCripto" prefHeight="49.0" prefWidth="82.0" styleClass="crypto-button" text="Comprar" />
                   <Label layoutX="103.0" layoutY="63.0" prefHeight="46.0" prefWidth="68.0" styleClass="button-label" text="Valor :">
