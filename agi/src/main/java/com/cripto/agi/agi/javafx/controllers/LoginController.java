@@ -19,8 +19,6 @@ import java.util.Objects;
 
 public class LoginController {
     @FXML
-    private Label welcomeText;
-    @FXML
     private TextField emailText;
     @FXML
     private TextField senhaText;
