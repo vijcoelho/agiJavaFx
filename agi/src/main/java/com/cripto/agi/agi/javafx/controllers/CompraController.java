@@ -5,6 +5,7 @@ import com.cripto.agi.agi.controller.CarteiraCriptoController;
 import com.cripto.agi.agi.controller.ClienteController;
 import com.cripto.agi.agi.dao.CarteiraDAO;
 import com.cripto.agi.agi.model.Carteira;
+import com.cripto.agi.agi.model.CarteiraCripto;
 import com.cripto.agi.agi.model.Cliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,10 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,6 +29,8 @@ public class CompraController {
     public Label ethValor;
     @FXML
     public Label solValor;
+    @FXML
+    public Label saldoGeral;
     @FXML
     public TextField quantidadeCripto;
     @FXML
@@ -50,22 +50,21 @@ public class CompraController {
     public void carregarInfos() {
         Cliente cliente = controller.pegarClienteLogado();
         Carteira carteira = carteiraDAO.pegarCarteiraPeloClienteId(cliente.getId_cliente());
+        CarteiraCripto carteiraCripto = carteiraCriptoController.pegarCarteiraCripto(cliente.getId_cliente());
         Criptomoedas criptomoedas = new Criptomoedas();
         criptomoedas.consultarPrecoBitcoin();
         criptomoedas.consultarPrecoEthereum();
         criptomoedas.consultarPrecoSolana();
 
         nomeLabel.setText(cliente.getNome());
+        saldoGeral.setText(String.format("%.2f", carteiraCripto.getSaldoBRL()));
         saldoLabel.setText(String.valueOf(carteira.getSaldoContaCorrente()));
         btcValor.setText(String.format("%.2f", criptomoedas.getPrecoBtc()));
         ethValor.setText(String.format("%.2f", criptomoedas.getPrecoEth()));
         solValor.setText(String.format("%.2f", criptomoedas.getPrecoSol()));
     }
 
-    public void comprarCripto(ActionEvent actionEvent) {
-        Cliente cliente = controller.pegarClienteLogado();
-        Carteira carteira = carteiraDAO.pegarCarteiraPeloClienteId(cliente.getId_cliente());
-
+    public void comprarCripto(ActionEvent actionEvent) throws IOException {
         int opcao = escolhaCripto.getSelectionModel().getSelectedIndex() + 1;
         Double valor = Double.parseDouble(quantidadeCripto.getText());
 
@@ -75,7 +74,7 @@ public class CompraController {
             alert.setHeaderText(null);
             alert.setContentText("Compra realizada com sucesso!");
             alert.showAndWait();
-            saldoLabel.setText(String.valueOf(carteira.getSaldoContaCorrente()));
+            voltarParaCarteiraCripto(actionEvent);
         } else {
             System.out.println("ERROR");
         }
@@ -103,6 +102,10 @@ public class CompraController {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setResizable(false);
         stage.setScene(new Scene(root));
+    }
+
+    public void sair(ActionEvent actionEvent) {
+        ((Stage)(((Button)actionEvent.getSource()).getScene().getWindow())).close();
     }
 
     @FXML

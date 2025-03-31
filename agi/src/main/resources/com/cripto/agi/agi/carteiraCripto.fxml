@@ -185,7 +185,7 @@
         <Pane layoutX="-7.0" layoutY="658.0" prefHeight="61.0" prefWidth="422.0" styleClass="bottom-pane">
             <children>
                 <Button layoutX="39.0" layoutY="6.0" mnemonicParsing="false" onAction="#carteiraCorrente" prefHeight="49.0" prefWidth="112.0" style="-fx-border-color: #FFFFFF;" styleClass="crypto-button" textFill="#0052cc" />
-                <Button layoutX="285.0" layoutY="6.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="112.0" styleClass="crypto-button" textFill="#0052cc" />
+                <Button layoutX="285.0" layoutY="6.0" mnemonicParsing="false" onAction="#sair" prefHeight="49.0" prefWidth="112.0" styleClass="crypto-button" textFill="#0052cc" />
                 <ImageView fitHeight="36.0" fitWidth="64.0" layoutX="59.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@imagens/images%20(1).png" />

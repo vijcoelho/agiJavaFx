@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -45,7 +46,7 @@ public class PixController {
         saldoLabel.setText(String.valueOf(carteira.getSaldoContaCorrente()));
     }
 
-    public void fazerPix(ActionEvent actionEvent) {
+    public void fazerPix(ActionEvent actionEvent) throws IOException {
         String valor = pixText.getText();
         Double valorEmDouble = Double.valueOf(valor);
 
@@ -55,6 +56,7 @@ public class PixController {
             alert.setHeaderText(null);
             alert.setContentText("Pix realizado com sucesso!");
             alert.showAndWait();
+            voltarParaCarteira(actionEvent);
         } else {
             System.out.println("Pix nao realizado!");
         }
@@ -87,5 +89,9 @@ public class PixController {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setResizable(false);
         stage.setScene(new Scene(root));
+    }
+
+    public void sair(ActionEvent actionEvent) {
+        ((Stage)(((Button)actionEvent.getSource()).getScene().getWindow())).close();
     }
 }

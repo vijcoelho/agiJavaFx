@@ -13,10 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -32,6 +29,8 @@ public class VerderController {
     public Label ethValor;
     @FXML
     public Label solValor;
+    @FXML
+    public Label saldoGeral;
     @FXML
     public TextField quantidadeCripto;
     @FXML
@@ -55,12 +54,13 @@ public class VerderController {
 
         nomeLabel.setText(cliente.getNome());
         saldoLabel.setText(String.valueOf(carteira.getSaldoContaCorrente()));
+        saldoGeral.setText(String.format("%.2f", carteiraCripto.getSaldoBRL()));
         btcValor.setText(String.valueOf(carteiraCripto.getSaldoBTC()));
         ethValor.setText(String.valueOf(carteiraCripto.getSaldoETH()));
         solValor.setText(String.valueOf(carteiraCripto.getSaldoSOl()));
     }
 
-    public void venderCripto(ActionEvent actionEvent) {
+    public void venderCripto(ActionEvent actionEvent) throws IOException {
         int opcao = escolhaCripto.getSelectionModel().getSelectedIndex() + 1;
         double valor = Double.parseDouble(quantidadeCripto.getText());
 
@@ -70,6 +70,7 @@ public class VerderController {
             alert.setHeaderText(null);
             alert.setContentText("Venda realizada com sucesso! Dinheiro da venda já está na sua conta!!");
             alert.showAndWait();
+            voltarParaCarteiraCripto(actionEvent);
         } else {
             System.out.println("ERROR");
         }
@@ -99,9 +100,12 @@ public class VerderController {
         stage.setScene(new Scene(root));
     }
 
+    public void sair(ActionEvent actionEvent) {
+        ((Stage)(((Button)actionEvent.getSource()).getScene().getWindow())).close();
+    }
+
     @FXML
     public void initialize() {
         escolhaCripto.getItems().addAll("Bitcoin", "Ethereum", "Solana");
     }
-
 }

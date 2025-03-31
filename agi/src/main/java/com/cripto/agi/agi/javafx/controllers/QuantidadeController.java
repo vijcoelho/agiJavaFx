@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -55,8 +56,8 @@ public class QuantidadeController {
         btcValor.setText(String.format("%.8f", carteiraCripto.conversao(1, carteiraCripto.getSaldoBTC())));
         ethValor.setText(String.format("%.8f", carteiraCripto.conversao(2, carteiraCripto.getSaldoETH())));
         solValor.setText(String.format("%.8f",carteiraCripto.conversao(3, carteiraCripto.getSaldoSOl())));
-        agicoinValor.setText(String.format("%.1f",carteiraCripto.getSaldoAGICOIN()));
-        saldoGeral.setText(String.format("%.1f",carteiraCripto.getSaldoBRL()));
+        agicoinValor.setText(String.format("%.2f",carteiraCripto.getSaldoAGICOIN()));
+        saldoGeral.setText(String.format("%.2f",carteiraCripto.getSaldoBRL()));
     }
 
     public void carteiraCorrente(ActionEvent actionEvent) throws IOException {
@@ -129,5 +130,9 @@ public class QuantidadeController {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setResizable(false);
         stage.setScene(new Scene(root));
+    }
+
+    public void sair(ActionEvent actionEvent) {
+        ((Stage)(((Button)actionEvent.getSource()).getScene().getWindow())).close();
     }
 }

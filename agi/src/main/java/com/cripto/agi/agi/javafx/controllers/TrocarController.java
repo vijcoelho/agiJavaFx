@@ -13,10 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -36,6 +33,8 @@ public class TrocarController {
     public TextField quantidadeCripto;
     @FXML
     public ChoiceBox<String> escolhaCripto;
+    @FXML
+    public Label saldoGeral;
     @FXML
     public ChoiceBox<String> destinoCripto;
 
@@ -58,12 +57,13 @@ public class TrocarController {
         nomeLabel.setText(cliente.getNome());
         saldoLabel.setText(String.valueOf(carteira.getSaldoContaCorrente()));
 
+        saldoGeral.setText(String.format("%.2f", carteiraCripto.getSaldoBRL()));
         btcValor.setText(String.valueOf(carteiraCripto.getSaldoBTC()));
         ethValor.setText(String.valueOf(carteiraCripto.getSaldoETH()));
         solValor.setText(String.valueOf(carteiraCripto.getSaldoSOl()));
     }
 
-    public void trocarCripto(ActionEvent actionEvent) {
+    public void trocarCripto(ActionEvent actionEvent) throws IOException {
         int origem = escolhaCripto.getSelectionModel().getSelectedIndex() + 1;
         int destino = destinoCripto.getSelectionModel().getSelectedIndex() + 1;
         double valor = Double.parseDouble(quantidadeCripto.getText());
@@ -74,6 +74,7 @@ public class TrocarController {
             alert.setHeaderText(null);
             alert.setContentText("Troca realizada com sucesso!");
             alert.showAndWait();
+            voltarParaCarteiraCripto(actionEvent);
         } else {
             System.out.println("ERROR");
         }
@@ -103,11 +104,13 @@ public class TrocarController {
         stage.setScene(new Scene(root));
     }
 
+    public void sair(ActionEvent actionEvent) {
+        ((Stage)(((Button)actionEvent.getSource()).getScene().getWindow())).close();
+    }
+
     @FXML
     public void initialize() {
         escolhaCripto.getItems().addAll("Bitcoin", "Ethereum", "Solana");
         destinoCripto.getItems().addAll("Bitcoin", "Ethereum", "Solana");
     }
-
-
 }

@@ -14,7 +14,7 @@
                         <Font size="30.0" />
                     </font>
                 </Label>
-                <Label fx:id="saldoLabel" layoutX="78.0" layoutY="97.0" styleClass="header-label" text="0,00" textFill="WHITE">
+                <Label fx:id="saldoLabel" layoutX="78.0" layoutY="79.0" styleClass="header-label" text="0,00" textFill="WHITE">
                     <font>
                         <Font size="25.0" />
                     </font>
@@ -24,15 +24,15 @@
                         <Font size="30.0" />
                     </font>
                 </Label>
-                <Label layoutX="27.0" layoutY="97.0" styleClass="header-label" text="R$:" textFill="WHITE">
+                <Label layoutX="27.0" layoutY="79.0" styleClass="header-label" text="R$:" textFill="WHITE">
                     <font>
                         <Font size="25.0" />
                     </font>
                 </Label>
-                <Label layoutX="242.0" layoutY="241.0" styleClass="info-label" text="Carteira Criptmoedas" />
-                <Pane layoutX="22.0" layoutY="134.0" prefHeight="273.0" prefWidth="372.0" style="-fx-background-color: d3eaff;" styleClass="info-pane">
+                <Label layoutX="242.0" layoutY="290.0" styleClass="info-label" text="Carteira Criptmoedas" />
+                <Pane layoutX="22.0" layoutY="183.0" prefHeight="275.0" prefWidth="372.0" style="-fx-background-color: d3eaff;" styleClass="info-pane">
                     <children>
-                        <Label layoutX="22.0" layoutY="14.0" prefHeight="32.0" prefWidth="320.0" text="Quantidade de Criptomoedas">
+                        <Label layoutX="22.0" layoutY="14.0" prefHeight="32.0" prefWidth="208.0" text="Suas criptomoedas">
                             <font>
                                 <Font size="22.0" />
                             </font>
@@ -95,38 +95,24 @@
                                 <Font size="19.0" />
                             </font>
                         </Label>
-                        <Label layoutX="135.0" layoutY="56.0">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="154.0" layoutY="95.0">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="135.0" layoutY="140.0">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                        </Label>
+                        <Button layoutX="18.0" layoutY="229.0" mnemonicParsing="false" onAction="#verEmReal" prefHeight="29.0" prefWidth="333.0" styleClass="crypto-button" text="Mostrar Criptomoedas no valor do real" />
                     </children></Pane>
-                <Label layoutX="27.0" layoutY="73.0" text="Saldo conta corrente" textFill="WHITE">
+                <Label layoutX="25.0" layoutY="59.0" text="Saldo conta corrente" textFill="WHITE">
                     <font>
                         <Font size="17.0" />
                     </font>
                 </Label>
-                <Label layoutX="22.0" layoutY="378.0" text="Saldo total de criptomoedas" textFill="WHITE">
+                <Label layoutX="25.0" layoutY="115.0" text="Saldo total de criptomoedas" textFill="WHITE">
                     <font>
                         <Font size="17.0" />
                     </font>
                 </Label>
-                <Label layoutX="27.0" layoutY="402.0" text="R$:" textFill="WHITE">
+                <Label layoutX="29.0" layoutY="141.0" styleClass="header-label" text="R$:" textFill="WHITE">
                     <font>
                         <Font size="25.0" />
                     </font>
                 </Label>
-                <Label fx:id="saldoGeral" layoutX="85.0" layoutY="402.0" text="0,00" textFill="WHITE">
+                <Label fx:id="saldoGeral" layoutX="78.0" layoutY="141.0" styleClass="header-label" text="0,00" textFill="WHITE">
                     <font>
                         <Font size="25.0" />
                     </font>
@@ -184,7 +170,7 @@
         <Pane layoutX="-7.0" layoutY="658.0" prefHeight="61.0" prefWidth="422.0" styleClass="bottom-pane">
             <children>
                 <Button layoutX="39.0" layoutY="6.0" mnemonicParsing="false" onAction="#carteiraCorrente" prefHeight="49.0" prefWidth="112.0" style="-fx-border-color: #FFFFFF;" styleClass="crypto-button" textFill="#0052cc" />
-                <Button layoutX="285.0" layoutY="6.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="112.0" styleClass="crypto-button" textFill="#0052cc" />
+                <Button layoutX="285.0" layoutY="6.0" mnemonicParsing="false" onAction="#sair" prefHeight="49.0" prefWidth="112.0" styleClass="crypto-button" textFill="#0052cc" />
                 <ImageView fitHeight="36.0" fitWidth="64.0" layoutX="59.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@imagens/images%20(1).png" />
